@@ -1,0 +1,138 @@
+// =============================================================================
+// AccessLens-IE: Power BI DAX Measures Library
+// Rendered from outputs/audit/audit.json via templates/measures.dax.tmpl
+// Author: Sohum Vivek Dhole
+// Check values in comments are audited 2025/2026 figures.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// 1. Core Enrolment & Trajectory Measures (fact_institution_year)
+// -----------------------------------------------------------------------------
+
+Total Enrolments =
+SUM ( fact_institution_year[total_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_enrol_2025_26}} | IUA = {{iua_enrol_2025_26}} | All HEA = {{sector_enrol_2025_26}}
+
+Enrolments 2019/2020 Baseline =
+CALCULATE (
+    [Total Enrolments],
+    dim_academic_year[academic_year] = "2019/2020"
+)
+// Check: Maynooth University = {{mu_enrol_2019_20}} | IUA = {{iua_enrol_2019_20}} | All HEA = {{sector_enrol_2019_20}}
+
+Enrolments Prior Year =
+VAR CurrentYearKey = MAX ( dim_academic_year[academic_year_key] )
+RETURN
+CALCULATE (
+    [Total Enrolments],
+    FILTER (
+        ALL ( dim_academic_year ),
+        dim_academic_year[academic_year_key] = CurrentYearKey - 1
+    )
+)
+// Check (2024/2025 when 2025/2026 selected): Maynooth University = {{mu_enrol_2024_25}} | All HEA = {{sector_enrol_2024_25}}
+
+YoY Enrolment Growth % =
+DIVIDE ( [Total Enrolments] - [Enrolments Prior Year], [Enrolments Prior Year], BLANK () )
+// Check (2025/2026): Maynooth University = +{{mu_enrol_yoy_growth}} | All HEA = +{{sector_enrol_yoy_growth}}
+
+6-Year Enrolment Growth % =
+DIVIDE (
+    [Total Enrolments] - [Enrolments 2019/2020 Baseline],
+    [Enrolments 2019/2020 Baseline],
+    BLANK ()
+)
+// Check (2019/2020 to 2025/2026): Maynooth University = +{{mu_enrol_6yr_growth}} (+{{mu_enrol_6yr_added}}) | IUA = +{{iua_enrol_6yr_growth}} | All HEA = +{{sector_enrol_6yr_growth}}
+
+// -----------------------------------------------------------------------------
+// 2. Widening Participation & Access Pathway Measures (NAP 2022-2028)
+// -----------------------------------------------------------------------------
+
+Standalone Foundation & Access Enrolments =
+SUM ( fact_institution_year[foundation_access_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_fa_2025_26}} | All HEA = {{sector_fa_2025_26}} (+{{sector_fa_6yr_growth}} vs {{sector_fa_2019_20}})
+
+UG Access & Certificate Pathway Enrolments =
+SUM ( fact_institution_year[ug_access_pathway_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_ug_pathway_2025_26}}
+
+Undergraduate Enrolments =
+SUM ( fact_institution_year[ug_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_ug_2025_26}} | All HEA = {{sector_ug_2025_26}}
+
+UG Access Pathway Share of UG % =
+DIVIDE ( [UG Access & Certificate Pathway Enrolments], [Undergraduate Enrolments], 0 )
+// Check (2025/2026): Maynooth University = {{mu_ug_pathway_share_ug_2025_26}} ({{mu_rag_pathway}}) | IUA = {{iua_ug_pathway_share_ug_2025_26}} | All HEA = {{sector_ug_pathway_share_ug_2025_26}}
+
+Honours Degree Enrolments =
+SUM ( fact_institution_year[honours_degree_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_hons_2025_26}}
+
+Honours Degree Share % =
+DIVIDE ( [Honours Degree Enrolments], [Total Enrolments], 0 )
+// Check (2025/2026): Maynooth University = {{mu_hons_share_2025_26}} | All HEA = {{sector_hons_share_2025_26}}
+
+Mature Enrolments (24+) =
+SUM ( fact_institution_year[mature_24plus_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_mature_2025_26}} | All HEA = {{sector_mature_2025_26}}
+
+Mature Share % =
+DIVIDE ( [Mature Enrolments (24+)], [Total Enrolments], 0 )
+// Check (2025/2026): Maynooth University = {{mu_mature_share_2025_26}} ({{mu_rag_mature}}) | IUA = {{iua_mature_share_2025_26}} | All HEA = {{sector_mature_share_2025_26}}
+
+Flexible & Part-Time Enrolments =
+SUM ( fact_institution_year[flexible_non_ft_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_pt_2025_26}} | All HEA = {{sector_flex_2025_26}}
+
+Flexible & Part-Time Share % =
+DIVIDE ( [Flexible & Part-Time Enrolments], [Total Enrolments], 0 )
+// Check (2025/2026): Maynooth University = {{mu_flex_share_2025_26}} ({{mu_rag_flexible}}) | IUA = {{iua_flex_share_2025_26}} | All HEA = {{sector_flex_share_2025_26}}
+
+Education & Social Care Enrolments =
+SUM ( fact_institution_year[edu_social_health_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_fs_edusoc_2025_26}}
+
+Education & Social Care Share % =
+DIVIDE ( [Education & Social Care Enrolments], [Total Enrolments], 0 )
+// Check (2025/2026): Maynooth University = {{mu_fs_edusoc_share_2025_26}} ({{mu_rag_edusoc}}) | All HEA = {{sector_fs_edusoc_share_2025_26}}
+
+Deprived-County Enrolments (Pobal < 0) =
+SUM ( fact_institution_year[deprived_county_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_deprived_county_enrol_2025_26}}
+
+County-Mapped Irish Enrolments =
+SUM ( fact_institution_year[irish_county_mapped_enrolments] )
+// Check (2025/2026): Maynooth University = {{mu_county_mapped_2025_26}}
+
+Deprived-County Catchment Share % =
+DIVIDE ( [Deprived-County Enrolments (Pobal < 0)], [County-Mapped Irish Enrolments], 0 )
+// Check (2025/2026): Maynooth University = {{mu_deprived_county_share_2025_26}} ({{mu_rag_deprived_county}}) | DCU = {{dcu_deprived_county_share_2025_26}} | UCD = {{ucd_deprived_county_share_2025_26}} | TCD = {{tcd_deprived_county_share_2025_26}}
+
+// -----------------------------------------------------------------------------
+// 3. County Geography & GDPR Disclosure Control Measures
+// -----------------------------------------------------------------------------
+
+County Total Irish Enrolments =
+SUM ( fact_county_year[national_enrolments] )
+// Check (2025/2026): All {{n_counties}} counties = {{national_county_mapped_enrol_2025_26}}
+
+County Maynooth Enrolments =
+SUM ( fact_county_year[maynooth_enrolments] )
+// Check (2025/2026): Dublin = {{cty_dublin_mu_2025_26}} | Kildare = {{cty_kildare_mu_2025_26}} | Meath = {{cty_meath_mu_2025_26}}
+
+County Maynooth Share of County HE % =
+DIVIDE ( [County Maynooth Enrolments], [County Total Irish Enrolments], 0 )
+// Check (2025/2026): Kildare = {{cty_kildare_mu_share_2025_26}} | Meath = {{cty_meath_mu_share_2025_26}} | Longford = {{cty_longford_mu_share_2025_26}} | Westmeath = {{cty_westmeath_mu_share_2025_26}}
+
+County Enrolments per 1,000 Pop =
+DIVIDE ( [County Total Irish Enrolments], SUM ( dim_county[census_pop_2022] ), 0 ) * 1000
+// Check (2025/2026): National = {{national_enrol_rate_1k_2025_26}} | Galway = {{cty_galway_rate_1k_2025_26}} | Kildare = {{cty_kildare_rate_1k_2025_26}}
+
+Dimension Enrolments (GDPR Suppressed Display) =
+VAR RawCount = SUM ( fact_institution_dimension_year[enrolments_raw] )
+RETURN
+IF (
+    RawCount > 0 && RawCount < {{small_cell_threshold}},
+    "<{{small_cell_threshold}}",
+    FORMAT ( RawCount, "#,##0" )
+)

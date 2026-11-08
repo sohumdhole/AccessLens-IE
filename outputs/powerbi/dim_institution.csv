@@ -1,0 +1,27 @@
+institution_key,institute,combined_institute,sector_group,is_iua_university,is_maynooth
+1,ATU Donegal,Atlantic Technological University,Technological University / IoT,False,False
+2,ATU Galway-Mayo,Atlantic Technological University,Technological University / IoT,False,False
+3,ATU Sligo,Atlantic Technological University,Technological University / IoT,False,False
+4,Dublin City University,Dublin City University,Traditional University,True,False
+5,"Dun Laoghaire Institute of Art, Design and Technology","Dun Laoghaire Institute of Art, Design and Technology",Technological University / IoT,False,False
+6,Dundalk IT,Dundalk IT,Technological University / IoT,False,False
+7,MTU Cork,Munster Technological University,Technological University / IoT,False,False
+8,MTU Kerry,Munster Technological University,Technological University / IoT,False,False
+9,"Mary Immaculate College, Limerick","Mary Immaculate College, Limerick",Specialist / Other College,False,False
+10,Maynooth University,Maynooth University,Traditional University,True,True
+11,National College of Art and Design,National College of Art and Design,Specialist / Other College,False,False
+12,National College of Ireland,National College of Ireland,Specialist / Other College,False,False
+13,Royal College of Surgeons,Royal College of Surgeons,Specialist / Other College,False,False
+14,SETU Carlow,South East Technological University,Technological University / IoT,False,False
+15,SETU Waterford,South East Technological University,Technological University / IoT,False,False
+16,"St. Angelas College of Home Economics, Sligo","St. Angela's College of Home Economics, Sligo",Specialist / Other College,False,False
+17,TU Dublin Blanchardstown,Technological University Dublin,Technological University / IoT,False,False
+18,TU Dublin City,Technological University Dublin,Technological University / IoT,False,False
+19,TU Dublin Tallaght,Technological University Dublin,Technological University / IoT,False,False
+20,TUS Athlone,Technological University of the Shannon,Technological University / IoT,False,False
+21,TUS Limerick,Technological University of the Shannon,Technological University / IoT,False,False
+22,Trinity College Dublin,Trinity College Dublin,Traditional University,True,False
+23,University College Cork,University College Cork,Traditional University,True,False
+24,University College Dublin,University College Dublin,Traditional University,True,False
+25,University of Galway,University of Galway,Traditional University,True,False
+26,University of Limerick,University of Limerick,Traditional University,True,False

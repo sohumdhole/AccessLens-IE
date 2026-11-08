@@ -1,0 +1,99 @@
+# Technical & Statistical Methodology
+
+**Project:** AccessLens-IE  
+**Author:** Sohum Vivek Dhole  
+**Policy Reference:** National Access Plan (NAP) 2022-2028 (Higher Education Authority / Department of Further and Higher Education, Research, Innovation and Science)
+
+---
+
+## 1. Data Acquisition & Provenance Architecture
+
+AccessLens-IE ingests **`{{raw_total_files}}`** real, public statistical exports (**`{{raw_total_bytes}}`** bytes total) with full cryptographic provenance recorded in [`outputs/audit/manifest.json`](../outputs/audit/manifest.json):
+
+1. **HEA Student Records System (SRS) Public Releases (`2019/2020` to `2025/2026`):**
+   * Extracted from the official HEA `Access our Data - Students` interactive portal (`https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/`, backed by `https://highereducationauthority.shinyapps.io/Enrolments_2026/`).
+   * **`{{raw_hea_files}}` CSV files** covering all **`{{n_academic_years}}`** academic years (`2019/2020` through `2025/2026`):
+     * Multi-year series by `Institute` (`tab1_Institute_by_year.csv`, **`{{hea_inst_csv_bytes}}`** bytes, SHA-256 prefix `{{hea_inst_csv_sha256_short}}`), `Programme Type`, `Age Group`, `Mode of Study`, `Field of Study`, `Course Level`, `Domicile Group`, `Gender`, and Irish-domiciled `County` (`tab1_County_IE_by_year.csv`, **`{{hea_cty_csv_bytes}}`** bytes, SHA-256 prefix `{{hea_cty_csv_sha256_short}}`).
+     * Annual two-way cross-tabulations across each of the **`{{n_academic_years}}`** years for `Institute x Programme Type`, `Institute x Age Group`, `Institute x Mode of Study`, `Institute x Field of Study`, `Institute x Course Level`, and Irish-domiciled `County x Institute`.
+2. **Pobal HP Deprivation Index Scores 2022 (Electoral Division Level, CC BY 4.0):**
+   * Downloaded from `https://data.gov.ie/dataset/pobal-hp-deprivation-index-scores-2022` (`hp-deprivation-index-scores-2022.csv`, **`{{pobal_csv_bytes}}`** bytes, SHA-256 prefix `{{pobal_csv_sha256_short}}`).
+   * Contains **`{{pobal_ed_count}}`** Electoral Divisions (EDs) across all **`{{n_counties}}`** counties of the Republic of Ireland, including embedded CSO Census 2022 total population (`TOTPOP22`, summing to **`{{pobal_total_pop_2022}}`** residents), relative deprivation score (`Index22_ED_std_rel_wt`), absolute deprivation score (`Index22_ED_std_abs_wt`), third-level education share (`EDHIGH22`), primary-only education share (`EDLOW_22`), lone parent ratio (`LONEPA22`), and male/female unemployment rates (`UNEMPM22`, `UNEMPF22`).
+
+---
+
+## 2. DuckDB Medallion Architecture (Step 1)
+
+`src/accesslens/step1_data_layer.py` builds a three-layer DuckDB analytical warehouse (`warehouse/accesslens.duckdb`):
+
+### 2.1 Bronze Layer (`bronze.*`)
+* Ingests all **`{{raw_hea_files}}`** HEA CSVs and the Pobal 2022 CSV without row deletion, attaching source filename and SHA-256 digest metadata to every record (`bronze.hea_tab1_multi_year`, `bronze.hea_inst_cross_year` with **`{{bronze_cross_cells}}`** raw cross-tabulation cells, `bronze.hea_county_inst_year`, and `bronze.pobal_ed_2022` with **`{{pobal_ed_count}}`** EDs).
+
+### 2.2 Silver Layer (`silver.*`) & Formal Data Quality Quarantine Rules
+Six automated data-quality rules (`outputs/kpis/dq_rule_results.csv`) govern the transition from Bronze to Silver:
+
+| Rule ID | Layer | Scope Checked | Flagged / Quarantined | Engineering Action |
+| :--- | :--- | ---: | ---: | :--- |
+| **DQ01_SUBTOTAL_SEPARATION** | Bronze -> Silver | `{{bronze_cross_cells}}` cells | `{{silver_quarantined_summary_cells}}` subtotal/total cells | Quarantined to `silver.quarantine_summary_rows`; **`{{silver_clean_cross_cells}}`** atomic cells retained in `silver.hea_inst_cross_clean`. |
+| **DQ02_COUNTY_UNMAPPED_QUARANTINE** | Bronze -> Silver | County-year rows | `{{silver_quarantined_county_cells}}` cells (`{{silver_quarantined_county_students_all_years}}` students over `{{n_academic_years}}` yrs; `{{silver_quarantined_county_students_2025_26}}` in `2025/2026`) | Quarantined `N/A` and `Unknown Ireland` domicile rows to `silver.quarantine_unmapped_county`. |
+| **DQ03_CROSS_TAB_ADDITIVITY_RECONCILIATION** | Silver | Institution-year-dimension tables | `{{dq_reconciled_tables}}` within `10`; max diff `{{dq_max_rounding_diff}}` | Verified sum of atomic cells against published `Row_Total` within HEA nearest-`{{hea_rounding_base}}` rounding tolerance. |
+| **DQ04_NCI_SCOPE_TRANSITION_FLAG** | Silver -> Gold | `{{gold_inst_year_rows}}` institution-years | `{{dq_nci_pre_scope_years}}` pre-scope zero years | Flagged National College of Ireland (`2019/2020` to `2022/2023`) with `in_hea_scope = FALSE` prior to entering SRS scope in `2023/2024`. |
+| **DQ05_POBAL_ED_COUNTY_COMPLETENESS** | Bronze -> Silver | `{{pobal_ed_count}}` EDs | `0` unmapped EDs | Deterministic `{{n_cso_ed_prefixes}}`-prefix CSO `ED_ID_STR` mapping to `{{n_counties}}` counties (`silver.county_mapping`). |
+| **DQ06_SMALL_CELL_SUPPRESSION** | Silver -> Gold | Atomic cross-tab + county flow cells | `{{suppressed_total_cells}}` small cells (`{{suppressed_inst_dim_cells}}` inst-dim + `{{suppressed_county_inst_cells}}` county-inst) | Flagged `0 < count < {{small_cell_threshold}}` (`count == {{hea_rounding_base}}`) with `suppressed_lt10 = TRUE` and `display_enrolments = '<10'`. |
+
+### 2.3 Deterministic County Mapping (`outputs/kpis/county_mapping.csv`)
+The Pobal 2022 Electoral Division file identifies each ED by a 6-character CSO code (`ED_ID_STR`, zero-padded to 6 digits) where the first two digits denote the CSO administrative county (`01` Carlow through `26` Roscommon, plus `47` for Donegal alongside `25`). Mapping on the two-digit CSO prefix rather than text parsing of `COUNTYNAME` avoids substring collisions (for example, `Dublin` vs `South Dublin` or `Cork City` vs `Cork County`) and maps all **`{{pobal_ed_count}}`** EDs (`{{pobal_total_pop_2022}}` population) across the **`{{n_counties}}`** Republic of Ireland counties with zero unmapped records.
+
+### 2.4 Gold Layer (`gold.*`)
+* `gold.fact_institution_year` (**`{{gold_inst_year_rows}}`** rows = `{{n_hea_institutions}}` institutions x `{{n_academic_years}}` academic years)
+* `gold.fact_institution_dimension_year` (**`{{gold_inst_dim_rows}}`** atomic rows across Programme Type, Age Group, Mode of Study, Field of Study, and Course Level)
+* `gold.fact_county_deprivation` (**`{{n_counties}}`** counties with population-weighted Pobal 2022 indices)
+* `gold.fact_county_institution_year` (**`{{gold_county_inst_rows}}`** county-to-institution flow records across `{{n_academic_years}}` years)
+
+---
+
+## 3. Institutional Benchmarking & Sector Taxonomy (Step 2)
+
+To place **Maynooth University** in comparative context across **`{{n_academic_years}}`** academic years (`2019/2020` to `2025/2026`), institutions are grouped into three reporting tiers:
+
+1. **Maynooth University** (`{{mu_enrol_2025_26}}` enrolments in `2025/2026`, up **`+{{mu_enrol_6yr_growth}}`** from `{{mu_enrol_2019_20}}` in `2019/2020`).
+2. **IUA Universities (`{{n_iua_universities}}` universities + RCSI):** Maynooth University, University College Dublin, University of Galway, University College Cork, Trinity College Dublin, Dublin City University, University of Limerick, and RCSI (full institution-level figures in `outputs/kpis/university_peer_scorecard_2025_26.csv`), totalling **`{{iua_enrol_2025_26}}`** enrolments in `2025/2026` (**`+{{iua_enrol_6yr_growth}}`** 6-year growth from **`{{iua_enrol_2019_20}}`**).
+3. **All HEA Institutions (`{{n_hea_institutions}}` institutions):** All IUA universities, all 5 Technological Universities (`TU Dublin`, `MTU`, `ATU`, `SETU`, `TUS`), Institutes of Technology (`DKIT`, `IADT`), Education & Specialist Colleges (`Mary Immaculate College`, `St. Angela's College`, `NCAD`, `NCI`, and constituent colleges), totalling **`{{sector_enrol_2025_26}}`** enrolments in `2025/2026` (**`+{{sector_enrol_6yr_growth}}`** 6-year growth from **`{{sector_enrol_2019_20}}`**).
+
+### Access Pathway Definitions
+* **Standalone SRS `Foundation and Access`:** Enrolments coded directly under `Programme Type = Foundation and Access` (`{{sector_fa_2025_26}}` nationally in `2025/2026`; `{{mu_fa_2025_26}}` at Maynooth University).
+* **Broad Non-Honours Undergraduate Pathway (`ug_access_pathway_enrolments`):** Sum of `Foundation and Access`, `Undergraduate Certificate`, `Undergraduate Diploma`, `Ordinary Degree`, and `Other Undergraduate` (`{{mu_ug_pathway_2025_26}}` at Maynooth University in `2025/2026`, or **`{{mu_ug_pathway_share_ug_2025_26}}`** of MU's **`{{mu_ug_2025_26}}`** undergraduates, compared with **`{{iua_ug_pathway_share_ug_2025_26}}`** across IUA universities and **`{{sector_ug_pathway_share_ug_2025_26}}`** across all HEA institutions).
+
+---
+
+## 4. Population-Weighted County Deprivation & Ecological Correlation (Step 3)
+
+For each county $c \in \{1, \dots, {{n_counties}}\}$ containing Electoral Divisions $e \in E_c$ with Census 2022 population $P_e$ (`TOTPOP22`) and Pobal HP 2022 relative deprivation score $D_e$ (`Index22_ED_std_rel_wt`), the population-weighted county score is computed as:
+
+$$\bar{D}_c = \frac{\sum_{e \in E_c} P_e \, D_e}{\sum_{e \in E_c} P_e}$$
+
+And the countyHigher Education Participation Rate per `1,000` residents in academic year $t$ is:
+
+$$R_{c,t} = \frac{\text{Enrolments}_{c,t}}{\sum_{e \in E_c} P_e} \times 1,000$$
+
+### Statistical Inference (`outputs/geography/deprivation_correlations.csv`)
+* **Pearson Linear Correlation ($r$):** Evaluated with exact two-sided $t$-distribution $p$-value and Fisher $z$-transformation 95% confidence interval:
+  $$z = \text{arctanh}(r), \quad \text{SE}(z) = \frac{1}{\sqrt{n - 3}}, \quad \text{CI}_{95\%} = \tanh\!\left(z \pm 1.96 \, \text{SE}(z)\right)$$
+* **Spearman Rank Correlation ($\rho$):** Evaluated with two-sided $p$-value and non-parametric percentile bootstrap 95% confidence interval (`10,000` resamples, fixed seed `42`).
+* **Audited Results (`2025/2026`, $n = {{n_counties}}$ counties):**
+  * **Pobal Relative Score (`Index22_ED_std_rel_wt`) vs Enrolments per `1,000`:** Pearson $r = {{corr_rel_2025_26_r}}$ (95% CI **`{{corr_rel_2025_26_ci_low}}` to `{{corr_rel_2025_26_ci_high}}`**, $p = {{corr_rel_2025_26_p}}$), Spearman $\rho = {{corr_rel_2025_26_rho}}$ (95% CI **`{{corr_rel_2025_26_rho_ci_low}}` to `{{corr_rel_2025_26_rho_ci_high}}`**, $p = {{corr_rel_2025_26_rho_p}}$), OLS slope **`{{corr_rel_2025_26_slope}}`** enrolments per `1,000` per index point ($R^2 = {{corr_rel_2025_26_r2}}$).
+  * **Census Match Year (`2022/2023`, $n = {{n_counties}}$ counties):** Pearson $r = {{corr_rel_2022_23_r}}$ (95% CI **`{{corr_rel_2022_23_ci_low}}` to `{{corr_rel_2022_23_ci_high}}`**, $p = {{corr_rel_2022_23_p}}$).
+  * **Pooled County Groups (`2025/2026`):** The **`{{n_affluent_counties}}`** net-affluent counties (`Pobal score >= 0`) record a pooled rate of **`{{pooled_affluent_counties_rate_1k_2025_26}}`** per `1,000`, compared with **`{{pooled_deprived_counties_rate_1k_2025_26}}`** per `1,000` across the **`{{n_deprived_counties}}`** below-average counties (`Pobal score < 0`).
+
+---
+
+## 5. National Access Plan 2022-2028 KPI & RAG Framework (Step 4)
+
+The National Access Plan 2022-2028 sets headline national targets including:
+* Raising the higher education transition rate from disadvantaged areas from **`{{nap_disadv_transition_base}}`** to **`{{nap_disadv_transition_target}}`**.
+* Raising mature disadvantaged new entrants from **`{{nap_mature_disadv_base}}`** to **`{{nap_mature_disadv_target}}`**.
+* Raising new entrants with a disability from **`{{nap_disability_base}}`** to **`{{nap_disability_target}}`**.
+* Raising Traveller new entrants from **`{{nap_traveller_base}}`** to **`{{nap_traveller_target}}`**.
+
+Source: HEA, National Access Plan launch announcement (https://hea.ie/2022/08/31/minister-harris-launches-the-new-national-access-plan-to-drive-equality-of-access-to-higher-education/). The Education and Social Sciences field share is reported as a context indicator only and is not RAG-scored.
+
+Because public SRS aggregate tables do not expose student-level Eircode deprivation or disability status, `src/accesslens/step4_kpi_framework.py` maps **`{{kpi_dictionary_count}}`** public SRS indicators to NAP priority goals with explicit `GREEN`, `AMBER`, and `RED` thresholds (`outputs/kpis/kpi_dictionary.csv` and `outputs/kpis/nap_rag_monitoring.csv`).

@@ -1,0 +1,909 @@
+{
+  "project": "AccessLens-IE",
+  "generated_utc": "2026-11-08T11:54:29Z",
+  "hea_portal_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+  "hea_shiny_app_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/",
+  "pobal_dataset_url": "https://data.gov.ie/dataset/pobal-hp-deprivation-index-scores-2022",
+  "pobal_direct_csv_url": "https://www.pobal.ie/wp-content/uploads/2024/01/hp-deprivation-index-scores-2022.csv",
+  "hea_rounding_base": 5,
+  "small_cell_suppression_threshold": 10,
+  "total_raw_files": 52,
+  "total_raw_bytes": 620916,
+  "files": [
+    {
+      "filename": "hea_age_group_by_year.csv",
+      "server_filename": "HEA_Students_Summary_Age Group_by_Academic_Year_2026-11-08 11:16:49.061191.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:50Z",
+      "bytes": 299,
+      "sha256": "8c0f62294c733c4bb71589cbf81474a5ad4a63ba85b8caf50d1c440261a241a4",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "Age Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_county_irish_2019_2020.csv",
+      "server_filename": "HEA_Students_Summary_County_by_Institute_for_2019/2020_Academic_Year_2026-11-08 11:17:32.859365.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:33Z",
+      "bytes": 3557,
+      "sha256": "ec5f8fa1f5437e54c58c46f5c43b8e1d66c439ac5f31dda6818fc0490aaada8a",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2019/2020",
+        "row_variable": "County",
+        "column_variable": "Institute",
+        "filters": {
+          "Domicile Group": [
+            "Ireland"
+          ]
+        }
+      }
+    },
+    {
+      "filename": "hea_county_irish_2020_2021.csv",
+      "server_filename": "HEA_Students_Summary_County_by_Institute_for_2020/2021_Academic_Year_2026-11-08 11:17:33.64257.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:34Z",
+      "bytes": 3522,
+      "sha256": "2c046a170b72fcbfca0f7650b5c03e34f76feec8f9fd6e6c8e5b9fa25a9cc37b",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2020/2021",
+        "row_variable": "County",
+        "column_variable": "Institute",
+        "filters": {
+          "Domicile Group": [
+            "Ireland"
+          ]
+        }
+      }
+    },
+    {
+      "filename": "hea_county_irish_2021_2022.csv",
+      "server_filename": "HEA_Students_Summary_County_by_Institute_for_2021/2022_Academic_Year_2026-11-08 11:17:34.733726.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:35Z",
+      "bytes": 3585,
+      "sha256": "c077ce75954c2018ae528d6f029fcdb6d891608361293e6b383bd507e4474c58",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2021/2022",
+        "row_variable": "County",
+        "column_variable": "Institute",
+        "filters": {
+          "Domicile Group": [
+            "Ireland"
+          ]
+        }
+      }
+    },
+    {
+      "filename": "hea_county_irish_2022_2023.csv",
+      "server_filename": "HEA_Students_Summary_County_by_Institute_for_2022/2023_Academic_Year_2026-11-08 11:17:36.068944.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:37Z",
+      "bytes": 3576,
+      "sha256": "081612b376a4465d48ba48c0f97158f2239a1ab6d54efb897a7eab8555bf190e",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2022/2023",
+        "row_variable": "County",
+        "column_variable": "Institute",
+        "filters": {
+          "Domicile Group": [
+            "Ireland"
+          ]
+        }
+      }
+    },
+    {
+      "filename": "hea_county_irish_2023_2024.csv",
+      "server_filename": "HEA_Students_Summary_County_by_Institute_for_2023/2024_Academic_Year_2026-11-08 11:17:37.248296.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:38Z",
+      "bytes": 3691,
+      "sha256": "db57c1cc1ce0a08225577e05ed73c25bc70d8036107db0126e614ee884cdccf3",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2023/2024",
+        "row_variable": "County",
+        "column_variable": "Institute",
+        "filters": {
+          "Domicile Group": [
+            "Ireland"
+          ]
+        }
+      }
+    },
+    {
+      "filename": "hea_county_irish_2024_2025.csv",
+      "server_filename": "HEA_Students_Summary_County_by_Institute_for_2024/2025_Academic_Year_2026-11-08 11:17:38.414828.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:39Z",
+      "bytes": 3698,
+      "sha256": "2170193adfbbaef9c74839b342b3816991c44aeb4f4ad312660d46558f0b1513",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2024/2025",
+        "row_variable": "County",
+        "column_variable": "Institute",
+        "filters": {
+          "Domicile Group": [
+            "Ireland"
+          ]
+        }
+      }
+    },
+    {
+      "filename": "hea_county_irish_2025_2026.csv",
+      "server_filename": "HEA_Students_Summary_County_by_Institute_for_2025/2026_Academic_Year_2026-11-08 11:17:39.13247.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:40Z",
+      "bytes": 3705,
+      "sha256": "1aa6b275e0da59b1b058977155d74f3cb30fd50d8d4c66cfb3d44e6d2bc878f7",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2025/2026",
+        "row_variable": "County",
+        "column_variable": "Institute",
+        "filters": {
+          "Domicile Group": [
+            "Ireland"
+          ]
+        }
+      }
+    },
+    {
+      "filename": "hea_county_irish_domiciled_by_year.csv",
+      "server_filename": "HEA_Students_Summary_County_by_Academic_Year_2026-11-08 11:16:56.339712.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:57Z",
+      "bytes": 1406,
+      "sha256": "b8cb7f49a72acff685538c35bfd0fb522c3bc836d55df927a299974db3beb3b5",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "County",
+        "filters": {
+          "Domicile Group": [
+            "Ireland"
+          ]
+        }
+      }
+    },
+    {
+      "filename": "hea_course_level_by_year.csv",
+      "server_filename": "HEA_Students_Summary_Course Level_by_Academic_Year_2026-11-08 11:16:53.088509.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:54Z",
+      "bytes": 278,
+      "sha256": "53861dc6770a03375347a5f3d86ff147b351f35c263938b522c1608d73b9c8d2",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "Course Level",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_domicile_group_by_year.csv",
+      "server_filename": "HEA_Students_Summary_Domicile Group_by_Academic_Year_2026-11-08 11:16:54.357097.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:55Z",
+      "bytes": 9901,
+      "sha256": "2e058a6902402b29eda9b7f7b8a0a909944310567a0611ae3f8e88ecf92f4524",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "Domicile Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_field_of_study_by_year.csv",
+      "server_filename": "HEA_Students_Summary_Field of Study_by_Academic_Year_2026-11-08 11:16:51.958766.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:53Z",
+      "bytes": 12882,
+      "sha256": "5c2dac1ed6baab664108e61a3e76a17af6ecf0c8b792f22523a2d8ddd4734b19",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "Field of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_gender_by_year.csv",
+      "server_filename": "HEA_Students_Summary_Gender_by_Academic_Year_2026-11-08 11:16:55.161953.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:56Z",
+      "bytes": 330,
+      "sha256": "9a4d6521f900a81840ff0f23576e580ae8838a26c174dfae691537d42feb8614",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "Gender",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_by_year.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Academic_Year_2026-11-08 11:16:47.606783.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:48Z",
+      "bytes": 4106,
+      "sha256": "de86a56cf25517c3858f956a1c647b25d8069594516156c94287e899aa9955c8",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "Institute",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_age_group_2019_2020.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Age Group_for_2019/2020_Academic_Year_2026-11-08 11:17:06.058848.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:07Z",
+      "bytes": 3003,
+      "sha256": "8881e78ed1c57fa1a05632e47bebac5253d679ef05cbc562efeeb97083953ad5",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2019/2020",
+        "row_variable": "Institute",
+        "column_variable": "Age Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_age_group_2020_2021.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Age Group_for_2020/2021_Academic_Year_2026-11-08 11:17:07.082115.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:08Z",
+      "bytes": 3006,
+      "sha256": "da3cf30e8e06652b91431eabbb31a43f9da1439b409940f90e78b4d5bb9a044c",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2020/2021",
+        "row_variable": "Institute",
+        "column_variable": "Age Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_age_group_2021_2022.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Age Group_for_2021/2022_Academic_Year_2026-11-08 11:17:07.769199.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:09Z",
+      "bytes": 3008,
+      "sha256": "8a8978c37190d65e2dbabb1ea4010c63abcfe82314219b9e00e690e8ccb38f3b",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2021/2022",
+        "row_variable": "Institute",
+        "column_variable": "Age Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_age_group_2022_2023.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Age Group_for_2022/2023_Academic_Year_2026-11-08 11:17:08.747476.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:09Z",
+      "bytes": 3001,
+      "sha256": "b477ab169843837793ece243512e029ab3ca82a149d1a5f95f9a32cde5941813",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2022/2023",
+        "row_variable": "Institute",
+        "column_variable": "Age Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_age_group_2023_2024.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Age Group_for_2023/2024_Academic_Year_2026-11-08 11:17:09.447035.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:10Z",
+      "bytes": 3134,
+      "sha256": "e6217ed431ee1fc6a1926356a9c4fdf80f660a2dd7464fd75db3acb3eedb7aa4",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2023/2024",
+        "row_variable": "Institute",
+        "column_variable": "Age Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_age_group_2024_2025.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Age Group_for_2024/2025_Academic_Year_2026-11-08 11:17:10.247742.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:11Z",
+      "bytes": 3138,
+      "sha256": "f80202c41b1db7f418bc71dced21af9783c15cee60e1448f0a17f62c3f70119f",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2024/2025",
+        "row_variable": "Institute",
+        "column_variable": "Age Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_age_group_2025_2026.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Age Group_for_2025/2026_Academic_Year_2026-11-08 11:17:11.217749.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:12Z",
+      "bytes": 3144,
+      "sha256": "6b687dea39a1eef5d0b393f38a6ad0dd99ac1c4129e0197b740c1f8af2251d4f",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2025/2026",
+        "row_variable": "Institute",
+        "column_variable": "Age Group",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_course_level_2019_2020.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Course Level_for_2019/2020_Academic_Year_2026-11-08 11:17:26.538244.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:27Z",
+      "bytes": 2903,
+      "sha256": "576b7b5acfed4b325a924809a8c7e9e4131e27973758d4ac07ef5adfa82fa8ee",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2019/2020",
+        "row_variable": "Institute",
+        "column_variable": "Course Level",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_course_level_2020_2021.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Course Level_for_2020/2021_Academic_Year_2026-11-08 11:17:27.256179.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:28Z",
+      "bytes": 2910,
+      "sha256": "a728aad382d93ff450e0a3799244b83f6dc0596de0203538390b5537f1945806",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2020/2021",
+        "row_variable": "Institute",
+        "column_variable": "Course Level",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_course_level_2021_2022.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Course Level_for_2021/2022_Academic_Year_2026-11-08 11:17:28.05536.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:29Z",
+      "bytes": 2909,
+      "sha256": "49c51a6d58c0d9455d29714961ba3224de7cdfaa606bc10feb3fae309d7a58f8",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2021/2022",
+        "row_variable": "Institute",
+        "column_variable": "Course Level",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_course_level_2022_2023.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Course Level_for_2022/2023_Academic_Year_2026-11-08 11:17:28.986549.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:30Z",
+      "bytes": 2909,
+      "sha256": "02cc16a4749921a1f0e830f2490b3012a2ec8fe1bac236e6fb3eb003e270ef5c",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2022/2023",
+        "row_variable": "Institute",
+        "column_variable": "Course Level",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_course_level_2023_2024.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Course Level_for_2023/2024_Academic_Year_2026-11-08 11:17:30.038986.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:31Z",
+      "bytes": 3034,
+      "sha256": "0a8d8f476df8d925e1209140c3b8f6e17aaadc95f42ef831b4a293fb244f7235",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2023/2024",
+        "row_variable": "Institute",
+        "column_variable": "Course Level",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_course_level_2024_2025.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Course Level_for_2024/2025_Academic_Year_2026-11-08 11:17:30.756969.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:32Z",
+      "bytes": 3036,
+      "sha256": "6ad072482550de42344d5b97b47dd52446e824234c9e3e9d9b4aaa810ef22fd5",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2024/2025",
+        "row_variable": "Institute",
+        "column_variable": "Course Level",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_course_level_2025_2026.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Course Level_for_2025/2026_Academic_Year_2026-11-08 11:17:31.736777.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:32Z",
+      "bytes": 3036,
+      "sha256": "30e6d4e6c8103d8da80464f8893988bee08ae23aa772d9725c72a8883298024b",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2025/2026",
+        "row_variable": "Institute",
+        "column_variable": "Course Level",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_field_of_study_2019_2020.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Field of Study_for_2019/2020_Academic_Year_2026-11-08 11:17:18.740498.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:19Z",
+      "bytes": 4693,
+      "sha256": "a8b20868c634c22171f3db0303a3599c8c13bc165f3fe51a92350eac668a7715",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2019/2020",
+        "row_variable": "Institute",
+        "column_variable": "Field of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_field_of_study_2020_2021.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Field of Study_for_2020/2021_Academic_Year_2026-11-08 11:17:20.176892.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:21Z",
+      "bytes": 4703,
+      "sha256": "84c707c8a77d6cf4bd06c33b2705ce6b4792c7eea0c82d90af53ac4dcec72bd0",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2020/2021",
+        "row_variable": "Institute",
+        "column_variable": "Field of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_field_of_study_2021_2022.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Field of Study_for_2021/2022_Academic_Year_2026-11-08 11:17:21.439147.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:22Z",
+      "bytes": 4706,
+      "sha256": "a4d3662626ab0eb2faa762b61071ff2dc3c98efa53bc20d40a1ae84e807537cf",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2021/2022",
+        "row_variable": "Institute",
+        "column_variable": "Field of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_field_of_study_2022_2023.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Field of Study_for_2022/2023_Academic_Year_2026-11-08 11:17:22.541207.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:23Z",
+      "bytes": 4707,
+      "sha256": "22086ed01832f985e8461e14091bbd3721d742d7cc2e936b7b6d5b056b0e6d39",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2022/2023",
+        "row_variable": "Institute",
+        "column_variable": "Field of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_field_of_study_2023_2024.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Field of Study_for_2023/2024_Academic_Year_2026-11-08 11:17:23.427789.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:24Z",
+      "bytes": 4884,
+      "sha256": "53da6543bf3800170653e23036073661a9435d592d96eef491237b08664df845",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2023/2024",
+        "row_variable": "Institute",
+        "column_variable": "Field of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_field_of_study_2024_2025.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Field of Study_for_2024/2025_Academic_Year_2026-11-08 11:17:24.648196.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:25Z",
+      "bytes": 4885,
+      "sha256": "bcaab2eceaf91d68f54f7bfc36bd3918a0b08b8c430cbc6bc985c638291c810d",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2024/2025",
+        "row_variable": "Institute",
+        "column_variable": "Field of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_field_of_study_2025_2026.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Field of Study_for_2025/2026_Academic_Year_2026-11-08 11:17:25.8253.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:26Z",
+      "bytes": 4897,
+      "sha256": "61256bfd21a758d321d37289b7a556a237b850965ddc84f621e61fd9c96ae427",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2025/2026",
+        "row_variable": "Institute",
+        "column_variable": "Field of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_mode_of_study_2019_2020.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Mode of Study_for_2019/2020_Academic_Year_2026-11-08 11:17:11.849528.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:12Z",
+      "bytes": 3058,
+      "sha256": "f1dbaafb5de4c686e9cc94b99088207656cf57f928c9dc570f1d78c4dd68ded1",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2019/2020",
+        "row_variable": "Institute",
+        "column_variable": "Mode of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_mode_of_study_2020_2021.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Mode of Study_for_2020/2021_Academic_Year_2026-11-08 11:17:12.91897.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:14Z",
+      "bytes": 3058,
+      "sha256": "9ba7d6f678eadfe70a0baeeac45bc5350b246aac2f832c5a7afdda3e9bc12910",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2020/2021",
+        "row_variable": "Institute",
+        "column_variable": "Mode of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_mode_of_study_2021_2022.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Mode of Study_for_2021/2022_Academic_Year_2026-11-08 11:17:13.737806.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:14Z",
+      "bytes": 3057,
+      "sha256": "215c3d1760b3d167956c21ba946e1bc89de75fd98e441bfabdd1ddb388accdc8",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2021/2022",
+        "row_variable": "Institute",
+        "column_variable": "Mode of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_mode_of_study_2022_2023.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Mode of Study_for_2022/2023_Academic_Year_2026-11-08 11:17:14.758454.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:15Z",
+      "bytes": 3062,
+      "sha256": "e13eac05b934aa690a9dfca0a250f78ca0ef3b052b7cf3c57e19b90416cb8caf",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2022/2023",
+        "row_variable": "Institute",
+        "column_variable": "Mode of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_mode_of_study_2023_2024.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Mode of Study_for_2023/2024_Academic_Year_2026-11-08 11:17:15.76983.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:17Z",
+      "bytes": 3203,
+      "sha256": "516e227e75dddf235c8d578fc72c1094d5f5fe6b155cbc7fd008aa870e66941c",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2023/2024",
+        "row_variable": "Institute",
+        "column_variable": "Mode of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_mode_of_study_2024_2025.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Mode of Study_for_2024/2025_Academic_Year_2026-11-08 11:17:16.760244.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:17Z",
+      "bytes": 3201,
+      "sha256": "42b719b5729792a706e6d4c64cda97f9c15d499fb38f7cdb4c6e80a4b61f85d2",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2024/2025",
+        "row_variable": "Institute",
+        "column_variable": "Mode of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_mode_of_study_2025_2026.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Mode of Study_for_2025/2026_Academic_Year_2026-11-08 11:17:17.659169.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:18Z",
+      "bytes": 3196,
+      "sha256": "1cc0aae5d839be5c0ddd2d44bbf90183fb1e474d23d618c7afe4a9a4d48f58c4",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2025/2026",
+        "row_variable": "Institute",
+        "column_variable": "Mode of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_programme_type_2019_2020.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Programme Type_for_2019/2020_Academic_Year_2026-11-08 11:16:57.349705.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:58Z",
+      "bytes": 4868,
+      "sha256": "08eee0a032f0a5ecb9b090020db33de0e423855303646557983bc563de20c587",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2019/2020",
+        "row_variable": "Institute",
+        "column_variable": "Programme Type",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_programme_type_2020_2021.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Programme Type_for_2020/2021_Academic_Year_2026-11-08 11:16:58.310068.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:59Z",
+      "bytes": 4895,
+      "sha256": "daa573d52864242652f7c03438ba59737d2c27305bf1a628cdc719085a91871f",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2020/2021",
+        "row_variable": "Institute",
+        "column_variable": "Programme Type",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_programme_type_2021_2022.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Programme Type_for_2021/2022_Academic_Year_2026-11-08 11:16:59.628957.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:01Z",
+      "bytes": 4886,
+      "sha256": "be52e7c78114f7d76d17f5660703233bb42031d96cdf0f89256178bb1b21433f",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2021/2022",
+        "row_variable": "Institute",
+        "column_variable": "Programme Type",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_programme_type_2022_2023.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Programme Type_for_2022/2023_Academic_Year_2026-11-08 11:17:01.044957.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:02Z",
+      "bytes": 4885,
+      "sha256": "c0977c7b480f09818ff3e3dddd5782b96483e41ac57c4146d8c4f41b457ed03d",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2022/2023",
+        "row_variable": "Institute",
+        "column_variable": "Programme Type",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_programme_type_2023_2024.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Programme Type_for_2023/2024_Academic_Year_2026-11-08 11:17:01.884414.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:03Z",
+      "bytes": 5089,
+      "sha256": "fbec19289896dab1166ebd76c7de59dc525f22369af03686ecbcb23455a8240b",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2023/2024",
+        "row_variable": "Institute",
+        "column_variable": "Programme Type",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_programme_type_2024_2025.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Programme Type_for_2024/2025_Academic_Year_2026-11-08 11:17:03.403499.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:04Z",
+      "bytes": 5083,
+      "sha256": "119aeb2fc72b8e1d0a5a3858117209f0df4568fc4940c2cee00775ff83206b5f",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2024/2025",
+        "row_variable": "Institute",
+        "column_variable": "Programme Type",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_institute_x_programme_type_2025_2026.csv",
+      "server_filename": "HEA_Students_Summary_Institute_by_Programme Type_for_2025/2026_Academic_Year_2026-11-08 11:17:05.145497.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:17:06Z",
+      "bytes": 5062,
+      "sha256": "daf2b6c9fea69bd96478cc2352f01867a89ee6597c2e38b1090bfc614431bbdc",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Choose Your Own Data",
+        "academic_year": "2025/2026",
+        "row_variable": "Institute",
+        "column_variable": "Programme Type",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_mode_of_study_by_year.csv",
+      "server_filename": "HEA_Students_Summary_Mode of Study_by_Academic_Year_2026-11-08 11:16:50.478284.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:51Z",
+      "bytes": 322,
+      "sha256": "fb8f6d529dc97b41a1a104fecc599279d0eb2584a24afa37508c5dc3a209fb6c",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "Mode of Study",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hea_programme_type_by_year.csv",
+      "server_filename": "HEA_Students_Summary_Programme Type_by_Academic_Year_2026-11-08 11:16:46.377735.csv",
+      "source_url": "https://highereducationauthority.shinyapps.io/Enrolments_2026/session/a65168f8e7e3ee2c0f7eb2aed55bd999/download/Download?w=2575345e60bb4849b0a29224da841bab",
+      "landing_url": "https://hea.ie/statistics/data-for-download-and-visualisations/access-our-data/access-our-data-students/",
+      "downloaded_utc": "2026-11-08T11:16:47Z",
+      "bytes": 973,
+      "sha256": "48101e25582d252a6128b300bf1c51020b05cdc45bbcc4bf586a50a596bbe125",
+      "licence": "HEA Open Data / Public Sector Information Re-Use",
+      "query": {
+        "tab": "Data by Academic Year",
+        "row_variable": "Programme Type",
+        "filters": "All"
+      }
+    },
+    {
+      "filename": "hp-deprivation-index-scores-2022.csv",
+      "server_filename": "hp-deprivation-index-scores-2022.csv",
+      "source_url": "https://www.pobal.ie/wp-content/uploads/2024/01/hp-deprivation-index-scores-2022.csv",
+      "landing_url": "https://data.gov.ie/dataset/pobal-hp-deprivation-index-scores-2022",
+      "downloaded_utc": "2026-11-08T11:16:40Z",
+      "bytes": 432836,
+      "sha256": "48288b0651c63c5ed3445c36457b116c1bc1ab7a0932b4092617c5a549e2f040",
+      "licence": "CC BY 4.0 (Pobal / data.gov.ie)",
+      "query": {
+        "dataset": "Pobal HP Deprivation Index Scores 2022 (Electoral Division level)",
+        "licence": "CC BY 4.0"
+      }
+    }
+  ]
+}

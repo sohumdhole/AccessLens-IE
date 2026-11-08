@@ -1,0 +1,138 @@
+// =============================================================================
+// AccessLens-IE: Power BI DAX Measures Library
+// Rendered from outputs/audit/audit.json via templates/measures.dax.tmpl
+// Author: Sohum Vivek Dhole
+// Check values in comments are audited 2025/2026 figures.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// 1. Core Enrolment & Trajectory Measures (fact_institution_year)
+// -----------------------------------------------------------------------------
+
+Total Enrolments =
+SUM ( fact_institution_year[total_enrolments] )
+// Check (2025/2026): Maynooth University = 15,945 | IUA = 157,495 | All HEA = 283,940
+
+Enrolments 2019/2020 Baseline =
+CALCULATE (
+    [Total Enrolments],
+    dim_academic_year[academic_year] = "2019/2020"
+)
+// Check: Maynooth University = 13,005 | IUA = 133,780 | All HEA = 246,635
+
+Enrolments Prior Year =
+VAR CurrentYearKey = MAX ( dim_academic_year[academic_year_key] )
+RETURN
+CALCULATE (
+    [Total Enrolments],
+    FILTER (
+        ALL ( dim_academic_year ),
+        dim_academic_year[academic_year_key] = CurrentYearKey - 1
+    )
+)
+// Check (2024/2025 when 2025/2026 selected): Maynooth University = 15,560 | All HEA = 278,880
+
+YoY Enrolment Growth % =
+DIVIDE ( [Total Enrolments] - [Enrolments Prior Year], [Enrolments Prior Year], BLANK () )
+// Check (2025/2026): Maynooth University = +2.5% | All HEA = +1.8%
+
+6-Year Enrolment Growth % =
+DIVIDE (
+    [Total Enrolments] - [Enrolments 2019/2020 Baseline],
+    [Enrolments 2019/2020 Baseline],
+    BLANK ()
+)
+// Check (2019/2020 to 2025/2026): Maynooth University = +22.6% (+2,940) | IUA = +17.7% | All HEA = +15.1%
+
+// -----------------------------------------------------------------------------
+// 2. Widening Participation & Access Pathway Measures (NAP 2022-2028)
+// -----------------------------------------------------------------------------
+
+Standalone Foundation & Access Enrolments =
+SUM ( fact_institution_year[foundation_access_enrolments] )
+// Check (2025/2026): Maynooth University = 20 | All HEA = 1,035 (+31.0% vs 790)
+
+UG Access & Certificate Pathway Enrolments =
+SUM ( fact_institution_year[ug_access_pathway_enrolments] )
+// Check (2025/2026): Maynooth University = 880
+
+Undergraduate Enrolments =
+SUM ( fact_institution_year[ug_enrolments] )
+// Check (2025/2026): Maynooth University = 13,310 | All HEA = 218,450
+
+UG Access Pathway Share of UG % =
+DIVIDE ( [UG Access & Certificate Pathway Enrolments], [Undergraduate Enrolments], 0 )
+// Check (2025/2026): Maynooth University = 6.6% (AMBER) | IUA = 8.8% | All HEA = 21.7%
+
+Honours Degree Enrolments =
+SUM ( fact_institution_year[honours_degree_enrolments] )
+// Check (2025/2026): Maynooth University = 12,430
+
+Honours Degree Share % =
+DIVIDE ( [Honours Degree Enrolments], [Total Enrolments], 0 )
+// Check (2025/2026): Maynooth University = 78.0% | All HEA = 60.2%
+
+Mature Enrolments (24+) =
+SUM ( fact_institution_year[mature_24plus_enrolments] )
+// Check (2025/2026): Maynooth University = 3,140 | All HEA = 98,925
+
+Mature Share % =
+DIVIDE ( [Mature Enrolments (24+)], [Total Enrolments], 0 )
+// Check (2025/2026): Maynooth University = 19.7% (AMBER) | IUA = 30.7% | All HEA = 34.8%
+
+Flexible & Part-Time Enrolments =
+SUM ( fact_institution_year[flexible_non_ft_enrolments] )
+// Check (2025/2026): Maynooth University = 1,665 | All HEA = 61,795
+
+Flexible & Part-Time Share % =
+DIVIDE ( [Flexible & Part-Time Enrolments], [Total Enrolments], 0 )
+// Check (2025/2026): Maynooth University = 10.4% (AMBER) | IUA = 15.3% | All HEA = 21.8%
+
+Education & Social Care Enrolments =
+SUM ( fact_institution_year[edu_social_health_enrolments] )
+// Check (2025/2026): Maynooth University = 3,150
+
+Education & Social Care Share % =
+DIVIDE ( [Education & Social Care Enrolments], [Total Enrolments], 0 )
+// Check (2025/2026): Maynooth University = 19.8% (CONTEXT) | All HEA = 12.9%
+
+Deprived-County Enrolments (Pobal < 0) =
+SUM ( fact_institution_year[deprived_county_enrolments] )
+// Check (2025/2026): Maynooth University = 4,775
+
+County-Mapped Irish Enrolments =
+SUM ( fact_institution_year[irish_county_mapped_enrolments] )
+// Check (2025/2026): Maynooth University = 14,720
+
+Deprived-County Catchment Share % =
+DIVIDE ( [Deprived-County Enrolments (Pobal < 0)], [County-Mapped Irish Enrolments], 0 )
+// Check (2025/2026): Maynooth University = 32.4% (GREEN) | DCU = 29.8% | UCD = 23.8% | TCD = 20.2%
+
+// -----------------------------------------------------------------------------
+// 3. County Geography & GDPR Disclosure Control Measures
+// -----------------------------------------------------------------------------
+
+County Total Irish Enrolments =
+SUM ( fact_county_year[national_enrolments] )
+// Check (2025/2026): All 26 counties = 238,105
+
+County Maynooth Enrolments =
+SUM ( fact_county_year[maynooth_enrolments] )
+// Check (2025/2026): Dublin = 4,530 | Kildare = 2,830 | Meath = 1,785
+
+County Maynooth Share of County HE % =
+DIVIDE ( [County Maynooth Enrolments], [County Total Irish Enrolments], 0 )
+// Check (2025/2026): Kildare = 22.0% | Meath = 17.0% | Longford = 12.3% | Westmeath = 12.1%
+
+County Enrolments per 1,000 Pop =
+DIVIDE ( [County Total Irish Enrolments], SUM ( dim_county[census_pop_2022] ), 0 ) * 1000
+// Check (2025/2026): National = 46.2 | Galway = 54.9 | Kildare = 52.0
+
+Dimension Enrolments (GDPR Suppressed Display) =
+VAR RawCount = SUM ( fact_institution_dimension_year[enrolments_raw] )
+RETURN
+IF (
+    RawCount > 0 && RawCount < 10,
+    "<10",
+    FORMAT ( RawCount, "#,##0" )
+)

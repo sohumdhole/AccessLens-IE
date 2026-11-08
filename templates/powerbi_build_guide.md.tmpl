@@ -1,0 +1,88 @@
+# Power BI Star-Schema Build Guide & Reconciliation Check Values
+
+**Project:** AccessLens-IE  
+**Author:** Sohum Vivek Dhole  
+**Star Schema Export Folder:** `outputs/powerbi/` (both `.csv` and `.parquet` provided)  
+**DAX Measures File:** [`outputs/powerbi/measures.dax`](../outputs/powerbi/measures.dax)
+
+---
+
+## 1. Star-Schema Data Model (`outputs/powerbi/`)
+
+Import the seven tables from `outputs/powerbi/` (prefer `.parquet` for strict data types or `.csv` with UTF-8 encoding):
+
+| Table Name | Role | Row Count | Primary / Foreign Key | Grain Description |
+| :--- | :--- | ---: | :--- | :--- |
+| **`dim_academic_year`** | Dimension | `{{pbi_dim_year_rows}}` | `academic_year_key` (`1` to `{{n_academic_years}}`) | Academic years `2019/2020` to `2025/2026` (`is_latest_year = TRUE` on `2025/2026`). |
+| **`dim_institution`** | Dimension | `{{pbi_dim_institution_rows}}` | `institution_key` (`1` to `{{n_hea_institutions}}`) | All `{{n_hea_institutions}}` HEA-funded institutions with `sector_group` and `is_maynooth` flag. |
+| **`dim_county`** | Dimension | `{{pbi_dim_county_rows}}` | `county_key` (`1` to `{{n_counties}}`) | All `{{n_counties}}` Republic of Ireland counties (`{{pobal_ed_count}}` EDs, `{{pobal_total_pop_2022}}` Census 2022 population, population-weighted Pobal HP 2022 scores). |
+| **`dim_rag`** | Dimension | `4` | `rag_status` | RAG status lookup (`GREEN`, `AMBER`, `RED`, `INFO`) with hex colour codes and sort order. |
+| **`fact_institution_year`** | Fact | `{{pbi_fact_inst_year_rows}}` | `academic_year_key`, `institution_key` | Institution-by-year access KPIs (`{{n_hea_institutions}}` institutions x `{{n_academic_years}}` years = `{{pbi_fact_inst_year_rows}}` rows) and `2025/2026` NAP RAG statuses. |
+| **`fact_institution_dimension_year`** | Fact | `{{pbi_fact_inst_dim_rows}}` | `academic_year_key`, `institution_key` | Atomic multi-dimensional breakdowns (`Programme Type`, `Age Group`, `Mode of Study`, `Field of Study`, `Course Level`) with `<{{small_cell_threshold}}` suppression flag (`{{suppressed_inst_dim_cells}}` flagged cells). |
+| **`fact_county_year`** | Fact | `{{pbi_fact_county_year_rows}}` | `academic_year_key`, `county_key` | County-by-year Irish-domiciled total enrolments, Maynooth University enrolments, and rates per `1,000` residents (`{{n_counties}}` counties x `{{n_academic_years}}` years = `{{pbi_fact_county_year_rows}}` rows). |
+
+### Relationships (Model View)
+1. `dim_academic_year[academic_year_key]` (`1`) -> (`*`) `fact_institution_year[academic_year_key]` (Single direction, active)
+2. `dim_institution[institution_key]` (`1`) -> (`*`) `fact_institution_year[institution_key]` (Single direction, active)
+3. `dim_rag[rag_status]` (`1`) -> (`*`) `fact_institution_year[overall_rag_status]` (Single direction, active)
+4. `dim_academic_year[academic_year_key]` (`1`) -> (`*`) `fact_institution_dimension_year[academic_year_key]` (Single direction, active)
+5. `dim_institution[institution_key]` (`1`) -> (`*`) `fact_institution_dimension_year[institution_key]` (Single direction, active)
+6. `dim_academic_year[academic_year_key]` (`1`) -> (`*`) `fact_county_year[academic_year_key]` (Single direction, active)
+7. `dim_county[county_key]` (`1`) -> (`*`) `fact_county_year[county_key]` (Single direction, active)
+
+---
+
+## 2. Page-by-Page Build Guide & Exact Reconciliation Check Values
+
+Use the DAX measures in [`outputs/powerbi/measures.dax`](../outputs/powerbi/measures.dax) to populate the four report pages below. Verify every visual against the audited check values before publishing.
+
+### Page 1: Executive Overview & Maynooth University Benchmark (`2019/2020` to `2025/2026`)
+* **Slicers:** `dim_academic_year[academic_year]` (default `2025/2026`), `dim_institution[institute]` (default `Maynooth University`), `dim_institution[sector_group]`.
+* **Top KPI Cards (Verify with `Maynooth University` and `2025/2026` selected):**
+  * `[Total Enrolments]` = **`{{mu_enrol_2025_26}}`** (Sector total unselected = **`{{sector_enrol_2025_26}}`**; IUA Universities = **`{{iua_enrol_2025_26}}`**)
+  * `[6-Year Enrolment Growth %]` = **`+{{mu_enrol_6yr_growth}}`** (`+{{mu_enrol_6yr_added}}` students from **`{{mu_enrol_2019_20}}`** in `2019/2020`; YoY = **`+{{mu_enrol_yoy_growth}}`** from **`{{mu_enrol_2024_25}}`**)
+  * `[Mature Student Share %]` = **`{{mu_mature_share_2025_26}}`** (**`{{mu_mature_2025_26}}`** mature students vs **`{{iua_mature_share_2025_26}}`** IUA and **`{{sector_mature_share_2025_26}}`** All HEA)
+  * `[Flexible & Part-Time Share %]` = **`{{mu_flex_share_2025_26}}`** (**`{{mu_pt_2025_26}}`** part-time/flexible students vs **`{{iua_flex_share_2025_26}}`** IUA and **`{{sector_flex_share_2025_26}}`** All HEA)
+  * `[Deprived-County Catchment Share %]` = **`{{mu_deprived_county_share_2025_26}}`** (**`{{mu_deprived_county_enrol_2025_26}}`** of **`{{mu_county_mapped_2025_26}}`** county-mapped Irish students)
+* **Visuals:**
+  1. **Line Chart:** `dim_academic_year[academic_year]` on X-axis; `[Total Enrolments]`, `[Mature Share %]`, and `[Flexible Share %]` comparing `Maynooth University`, `IUA Universities`, and `All HEA Institutions`.
+  2. **Clustered Bar Chart:** Peer university comparison on `dim_institution[institute]` filtered to `sector_group = "IUA University"`.
+
+### Page 2: Access Pathways, Programme Type & Discipline Mix
+* **Filter:** `fact_institution_dimension_year[dimension_type]` switcher (`Programme Type`, `Field of Study`, `Course Level`, `Age Group`, `Mode of Study`).
+* **Reconciliation Check Values (`2025/2026`):**
+  * National Standalone `Foundation and Access` (`Programme Type`): **`{{sector_fa_2025_26}}`** (up **`+{{sector_fa_6yr_growth}}`** from **`{{sector_fa_2019_20}}`** in `2019/2020`; led by ATU Donegal **`{{fa_atu_donegal_2025_26}}`**, TU Dublin City **`{{fa_tud_city_2025_26}}`**, TCD **`{{fa_tcd_2025_26}}`**, University of Galway **`{{fa_uog_2025_26}}`**, MTU Kerry **`{{fa_mtu_kerry_2025_26}}`**; Maynooth University **`{{mu_fa_2025_26}}`**).
+  * Maynooth Broad Non-Honours UG Pathways (`[UG Access Pathway Enrolments]`): **`{{mu_ug_pathway_2025_26}}`** (**`{{mu_ug_pathway_share_ug_2025_26}}`** of MU's **`{{mu_ug_2025_26}}`** undergraduates; **`{{mu_ug_pathway_share_tot_2025_26}}`** of total enrolments).
+  * Maynooth Honours Degrees: **`{{mu_hons_2025_26}}`** (**`{{mu_hons_share_2025_26}}`** of total enrolments, up **`+{{mu_hons_6yr_growth}}`** from **`{{mu_hons_2019_20}}`**).
+  * Maynooth Field of Study Mix (`2025/2026`): Business, Administration & Law **`{{mu_fs_bus_2025_26}}`** (**`{{mu_fs_bus_share_2025_26}}`**), Arts & Humanities **`{{mu_fs_arts_2025_26}}`** (**`{{mu_fs_arts_share_2025_26}}`**), Natural Sciences, Mathematics & Statistics **`{{mu_fs_natsci_2025_26}}`** (**`{{mu_fs_natsci_share_2025_26}}`**), Social Sciences, Journalism & Information **`{{mu_fs_soc_2025_26}}`** (**`{{mu_fs_soc_share_2025_26}}`**), Education **`{{mu_fs_edu_2025_26}}`** (**`{{mu_fs_edu_share_2025_26}}`**), Health & Welfare **`{{mu_fs_health_2025_26}}`** (**`{{mu_fs_health_share_2025_26}}`**, up **`+{{mu_fs_health_6yr_growth}}`** from **`{{mu_fs_health_2019_20}}`** in `2019/2020`).
+  * Combined Education + Social Sciences + Health & Welfare at Maynooth: **`{{mu_fs_edusoc_2025_26}}`** (**`{{mu_fs_edusoc_share_2025_26}}`** vs **`{{sector_fs_edusoc_share_2025_26}}`** All HEA).
+
+### Page 3: Geography, Pobal HP Deprivation & Maynooth Regional Catchment (`2025/2026`)
+* **Scatter Visual (`dim_county` + `fact_county_year` filtered to `2025/2026`):**
+  * **X-Axis:** `dim_county[pop_weighted_rel_score_2022]`
+  * **Y-Axis:** `[County Enrolments per 1,000 Pop]`
+  * **Bubble Size:** `dim_county[census_pop_2022]`
+  * **Legend:** `dim_county[deprivation_tier]`
+* **Reconciliation Check Values (`2025/2026`):**
+  * Total Census 2022 Population across `{{n_counties}}` counties (`{{pobal_ed_count}}` EDs): **`{{pobal_total_pop_2022}}`**
+  * National County-Mapped Irish-Domiciled Enrolments: **`{{national_county_mapped_enrol_2025_26}}`** (**`{{national_enrol_rate_1k_2025_26}}`** per `1,000` residents)
+  * Ecological Correlation (County Pobal Score vs Enrolments per `1,000`): **Pearson $r = {{corr_rel_2025_26_r}}$** (95% CI **`{{corr_rel_2025_26_ci_low}}` to `{{corr_rel_2025_26_ci_high}}`**, $p = {{corr_rel_2025_26_p}}$), **Spearman $\rho = {{corr_rel_2025_26_rho}}$** (95% CI **`{{corr_rel_2025_26_rho_ci_low}}` to `{{corr_rel_2025_26_rho_ci_high}}`**), OLS slope **`{{corr_rel_2025_26_slope}}`** ($R^2 = {{corr_rel_2025_26_r2}}$).
+  * Maynooth Top Commuter & Regional Counties (`2025/2026`):
+    * **Dublin:** **`{{cty_dublin_mu_2025_26}}`** MU students (`{{cty_dublin_mu_share_2025_26}}` of Dublin's **`{{cty_dublin_enrol_2025_26}}`** HE students; Pobal **`{{cty_dublin_rel_score}}`**)
+    * **Kildare:** **`{{cty_kildare_mu_2025_26}}`** MU students (**`{{cty_kildare_mu_share_2025_26}}`** of Kildare's **`{{cty_kildare_enrol_2025_26}}`** HE students; Pobal **`{{cty_kildare_rel_score}}`**)
+    * **Meath:** **`{{cty_meath_mu_2025_26}}`** MU students (**`{{cty_meath_mu_share_2025_26}}`** of Meath's **`{{cty_meath_enrol_2025_26}}`** HE students; Pobal **`{{cty_meath_rel_score}}`**)
+    * **Westmeath:** **`{{cty_westmeath_mu_2025_26}}`** MU students (**`{{cty_westmeath_mu_share_2025_26}}`** of Westmeath's **`{{cty_westmeath_enrol_2025_26}}`** HE students; Pobal **`{{cty_westmeath_rel_score}}`**)
+    * **Wexford:** **`{{cty_wexford_mu_2025_26}}`** MU students (**`{{cty_wexford_mu_share_2025_26}}`** of Wexford's **`{{cty_wexford_enrol_2025_26}}`** HE students; Pobal **`{{cty_wexford_rel_score}}`**)
+    * **Offaly:** **`{{cty_offaly_mu_2025_26}}`** MU students (**`{{cty_offaly_mu_share_2025_26}}`** of Offaly's **`{{cty_offaly_enrol_2025_26}}`** HE students; Pobal **`{{cty_offaly_rel_score}}`**)
+    * **Cavan:** **`{{cty_cavan_mu_2025_26}}`** MU students (**`{{cty_cavan_mu_share_2025_26}}`** of Cavan's **`{{cty_cavan_enrol_2025_26}}`** HE students; Pobal **`{{cty_cavan_rel_score}}`**)
+    * **Laois:** **`{{cty_laois_mu_2025_26}}`** MU students (**`{{cty_laois_mu_share_2025_26}}`** of Laois's **`{{cty_laois_enrol_2025_26}}`** HE students; Pobal **`{{cty_laois_rel_score}}`**)
+    * **Longford:** **`{{cty_longford_mu_2025_26}}`** MU students (**`{{cty_longford_mu_share_2025_26}}`** of Longford's **`{{cty_longford_enrol_2025_26}}`** HE students; Pobal **`{{cty_longford_rel_score}}`**)
+    * **Carlow:** **`{{cty_carlow_mu_2025_26}}`** MU students (**`{{cty_carlow_mu_share_2025_26}}`** of Carlow's **`{{cty_carlow_enrol_2025_26}}`** HE students; Pobal **`{{cty_carlow_rel_score}}`**)
+    * **Leitrim:** **`{{cty_leitrim_mu_2025_26}}`** MU students (**`{{cty_leitrim_mu_share_2025_26}}`** of Leitrim's **`{{cty_leitrim_enrol_2025_26}}`** HE students; Pobal **`{{cty_leitrim_rel_score}}`**)
+* **Mandatory Page Footer Note:** *"County deprivation is an ecological (population-weighted Electoral Division) indicator, not an individual student deprivation measure. Published HEA counts are rounded to the nearest {{hea_rounding_base}}, and cells below {{small_cell_threshold}} are suppressed as <10."*
+
+### Page 4: National Access Plan (NAP) 2022-2028 RAG Scorecard (`2025/2026`)
+* **Matrix Visual:** Rows = `dim_institution[institute]` grouped by `sector_group`; Values = `[Mature Share %]`, `[Flexible Share %]`, `[UG Access Pathway Share %]`, `[Deprived-County Catchment Share %]`, `[Education & Social Care Share %]`, and `overall_rag_status` conditionally formatted via `dim_rag[hex_color]`.
+* **Reconciliation Check Values (`2025/2026`):**
+  * Sector Composite RAG Distribution across `{{n_hea_institutions}}` institutions: **`{{sector_rag_overall_green_insts}}` GREEN**, **`{{sector_rag_overall_amber_insts}}` AMBER**, **`{{sector_rag_overall_red_insts}}` RED**.
+  * Maynooth University RAG Profile: Overall **`{{mu_rag_overall}}`** (**`{{mu_rag_n_green}}` GREEN**: Deprived-County Share `{{mu_deprived_county_share_2025_26}}` >= `{{rag_th_dep_green}}`; **`{{mu_rag_n_amber}}` AMBER**: Mature Share `{{mu_mature_share_2025_26}}` vs `{{rag_th_mature_green}}` target, Flexible Share `{{mu_flex_share_2025_26}}` vs `{{rag_th_flex_green}}` target, UG Pathway Share `{{mu_ug_pathway_share_ug_2025_26}}` vs `{{rag_th_pathway_green}}` target; **`{{mu_rag_n_red}}` RED**).

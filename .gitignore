@@ -1,0 +1,13 @@
+# raw data is never committed to GitHub (download from HEA and data.gov.ie; see data/README.md)
+data/raw/*
+!data/raw/.gitkeep
+# rebuildable DuckDB warehouse
+warehouse/
+*.duckdb
+*.duckdb.wal
+# Python and tool caches
+__pycache__/
+.pytest_cache/
+*.pyc
+.ipynb_checkpoints/
+~$*.xlsx
